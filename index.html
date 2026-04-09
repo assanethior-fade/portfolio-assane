@@ -34,17 +34,21 @@
 <body>
 
 <header class="fixed top-0 w-full bg-slate-900/80 backdrop-blur-lg z-50 border-b border-white/10">
-    <nav class="fixed top-0 left-0 w-full z-50 bg-slate-900/90 backdrop-blur-sm border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-4">
-        <ul class="flex flex-row items-center justify-start gap-4 py-4 overflow-x-auto no-scrollbar">
-            <li><a href="#accueil" class="text-xs font-bold text-white hover:text-blue-400 whitespace-nowrap">ACCUEIL</a></li>
-            <li><a href="#propos" class="text-xs font-bold text-white hover:text-blue-400 whitespace-nowrap">À PROPOS</a></li>
-            <li><a href="#competences" class="text-xs font-bold text-white hover:text-blue-400 whitespace-nowrap">COMPÉTENCES</a></li>
-            <li><a href="#projets" class="text-xs font-bold text-white hover:text-blue-400 whitespace-nowrap">PROJETS</a></li>
-            <li><a href="#contact" class="text-xs font-bold text-white hover:text-blue-400 whitespace-nowrap">CONTACT</a></li>
-        </ul>
-    </div>
+    <nav class="fixed top-0 left-0 h-screen w-48 z-50 bg-slate-900/95 border-r border-white/10 hidden md:flex flex-col pt-16 px-6 shadow-2xl shadow-slate-950/50">
+  <ul class="flex flex-col gap-6 text-xs font-bold uppercase tracking-widest text-slate-400">
+    <li><a href="#accueil" class="nav-link flex items-center gap-2 group hover:text-blue-400 focus:text-blue-500 transition-colors duration-300">
+      <span class="w-2 h-0.5 bg-blue-500/50 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>01. Accueil</a></li>
+    <li><a href="#propos" class="nav-link flex items-center gap-2 group hover:text-blue-400 focus:text-blue-500 transition-colors duration-300">
+      <span class="w-2 h-0.5 bg-blue-500/50 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>02. À propos</a></li>
+    <li><a href="#competences" class="nav-link flex items-center gap-2 group hover:text-blue-400 focus:text-blue-500 transition-colors duration-300">
+      <span class="w-2 h-0.5 bg-blue-500/50 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>03. Compétences</a></li>
+    <li><a href="#projets" class="nav-link flex items-center gap-2 group hover:text-blue-400 focus:text-blue-500 transition-colors duration-300">
+      <span class="w-2 h-0.5 bg-blue-500/50 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>04. Projets</a></li>
+    <li><a href="#contact" class="nav-link flex items-center gap-2 group hover:text-blue-400 focus:text-blue-500 transition-colors duration-300">
+      <span class="w-2 h-0.5 bg-blue-500/50 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>05. Contact</a></li>
+  </ul>
 </nav>
+    
 </header>
 
 <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-slate-900 text-white">
@@ -434,6 +438,32 @@
 </footer>
     &copy; 2026 - Portfolio Professionnel - Génie Informatique
 </footer>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll(".nav-link");
 
+        function makeActive() {
+            sections.forEach(function(section) {
+                const sectionTop = section.offsetTop - 100; // Ajustement pour l'en-tête
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    navLinks.forEach(function(link) {
+                        link.classList.remove("text-blue-500", "font-extrabold");
+                        link.querySelector("span").classList.remove("scale-x-100");
+                    });
+                    const activeLink = document.querySelector(`nav a[href="#${section.id}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add("text-blue-500", "font-extrabold");
+                        activeLink.querySelector("span").classList.add("scale-x-100");
+                    }
+                }
+            });
+        }
+
+        window.addEventListener("scroll", makeActive);
+        makeActive(); // Activer la section actuelle au chargement
+    });
+</script>
 </body>
 </html>
